@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from "./components/SignupFormPage";
+import Navigation from "./components/Navigation/index";
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -20,22 +21,29 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && (
-    <Switch>
-      <Route path='/login'>
-        <LoginFormPage />
-      </Route>
-      <Route path="/signup">
-        <SignupFormPage />
-      </Route>
-      <Route path='/' exact>
-        <>
-          <div>Splash Page</div>
-          <div>User: {user}</div>
-        </>
-      </Route>
-    </Switch>
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
+          <Route path='/' exact>
+            <>
+              <div>Splash Page</div>
+              <div>User: {user}</div>
+            </>
+          </Route>
+        </Switch>
+      )}
+    </>
   );
 }
+
+
 
 export default App;
