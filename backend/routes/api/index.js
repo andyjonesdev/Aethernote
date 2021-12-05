@@ -11,9 +11,11 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-router.post('/test', function(req, res) {
-      res.json({ requestBody: req.body });
-});
+// test for frontend CSRF protection
+// router.post('/test', function(req, res) {
+//       res.json({ requestBody: req.body });
+// });
+
 // tests for auth middleware routes
 // router.get('/set-token-cookie', asyncHandler(async (_req, res) => {
 //   const user = await User.findOne({
