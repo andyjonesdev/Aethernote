@@ -33,6 +33,14 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
+//thunk
+export const restoreUser = () => async dispatch => {
+  const response = await csrfFetch('/api/session');
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
+};
+
 const initialState = { user: null };
 
 //actions will hit this reducer after the reducers are combined
