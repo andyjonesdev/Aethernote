@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import LoginFormPage from './components/LoginFormPage';
+import LoginFormPage from './components/LoginFormModal';
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation/index";
 import * as sessionActions from "./store/session";
