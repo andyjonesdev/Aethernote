@@ -6,6 +6,7 @@ import LoginFormPage from './components/LoginFormModal';
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation/index";
 import NotebooksList from "./components/NotebooksList"
+import NotesList from "./components/NotesList"
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/notebooks/:id/notes" exact>
+            <NotesList />
           </Route>
           <Route path='/' exact>
             <>
