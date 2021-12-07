@@ -28,6 +28,7 @@ router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       } else return res.json('No notes were found')
 }))
 
+// Create a new note using info supplied in req.body
 // bringing in userId, title, content, optional notebookId
 router.post('/', asyncHandler(async(req, res) => {
       const { userId, title, content, notebookId } = req.body
@@ -38,6 +39,25 @@ router.post('/', asyncHandler(async(req, res) => {
             notebookId
       })
       return res.json(newNote)
+}))
+
+
+// Update a note's title and/or content
+router.patch('/:id', asyncHandler(async(req, res) => {
+      const { id:noteId } = req.params
+      const noteToEdit = await Note.findByPk(noteId)
+      const { title, content } = req.body
+      // We either update both fields, update title, or update content
+      if (title === null) {
+            await noteToEdit.update({
+                  content
+            })
+      } else if (content === null) {
+            await noteToEdit.update({ title })
+      } else {
+            await noteToEdit.update({ title, content })
+      }
+      return res.json(noteToEdit)
 }))
 
 module.exports = router
