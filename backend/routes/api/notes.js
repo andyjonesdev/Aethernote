@@ -18,9 +18,9 @@ const router = express.Router();
 // GET Notes attached to a specific Notebook
 router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       const { id } = req.params
-      const foundNotes = Note.findAll({
+      const foundNotes = await Note.findAll({
             where: {
-                notebookId: id
+                  notebookId: id
             }
       })
       if (foundNotes.length > 0) {
