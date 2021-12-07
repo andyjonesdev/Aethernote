@@ -16,7 +16,7 @@ const router = express.Router();
 
 // all routes will be prefixed by /notes
 // GET Notes attached to a specific Notebook
-router.get('notebooks/:id', asyncHandler(async(req, res) => {
+router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       const { id } = req.params
       const foundNotes = Note.findAll({
             where: {

@@ -12,7 +12,7 @@ const setNotes = (notes) => {
 
 // thunks
 //get notes belonging to the supplied notebook
-const getNotesofNotebook = (notebook) => async(dispatch) => {
+export const getNotesofNotebook = (notebook) => async(dispatch) => {
       const res = await csrfFetch(`/api/notes/notebook/${notebook.id}`);
       const data = await res.json();
       dispatch(setNotes(data));
