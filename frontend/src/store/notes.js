@@ -12,8 +12,8 @@ const setNotes = (notes) => {
 
 // thunks
 //get notes belonging to the supplied notebook
-export const getNotesofNotebook = (notebookId) => async(dispatch) => {
-      const res = await csrfFetch(`/api/notes/notebook/${notebookId}`);
+export const getNotesOfNotebook = (notebookId) => async(dispatch) => {
+      const res = await csrfFetch(`/api/notes/notebooks/${notebookId}`);
       const data = await res.json();
       dispatch(setNotes(data));
       return;
@@ -35,6 +35,4 @@ const notesReducer = (state = initialState, action) => {
   }
 };
 
-//TODO put this in big reducer
-//useEffect, useSelector, useDispatch to test it in a component
 export default notesReducer

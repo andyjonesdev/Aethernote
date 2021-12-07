@@ -31,7 +31,7 @@ function App() {
           <Route path="/login">
             <LoginFormPage />
           </Route>
-          <Route path="/notebooks">
+          <Route path="/notebooks" exact>
             <NotebooksList />
           </Route>
           <Route path="/signup">

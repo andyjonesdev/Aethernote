@@ -10,11 +10,11 @@ export default function NotesList () {
 
       useEffect(() => {
             dispatch(getNotesOfNotebook(notebookId))
-      }, [notebookId])
+      }, [notebookId, dispatch])
 
       const noteObjects =  useSelector(state => (state.notes.notes))
       const notes = noteObjects?.map(object => {
-            return <div>{object.title}</div>
+            return <div key={object.id}>{object.title}</div>
       })
       return(
             <div className='NotesList'>
