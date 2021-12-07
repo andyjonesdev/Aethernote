@@ -28,8 +28,7 @@ router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       } else return res.json('No notes were found')
 }))
 
-// Create a new note using info supplied in req.body
-// bringing in userId, title, content, optional notebookId
+// Create a new Note using info supplied in req.body
 router.post('/', asyncHandler(async(req, res) => {
       const { userId, title, content, notebookId } = req.body
       const newNote = await Note.create({
@@ -42,7 +41,7 @@ router.post('/', asyncHandler(async(req, res) => {
 }))
 
 
-// Update a note's title and/or content
+// Update a Note's title and/or content in DB
 router.patch('/:id', asyncHandler(async(req, res) => {
       const { id:noteId } = req.params
       const noteToEdit = await Note.findByPk(noteId)
@@ -58,6 +57,15 @@ router.patch('/:id', asyncHandler(async(req, res) => {
             await noteToEdit.update({ title, content })
       }
       return res.json(noteToEdit)
+}))
+
+// Delete a Note from DB
+router.delete('/:id', asyncHandler(async(req, res) => {
+      const { id:noteId } = req.params;
+      const noteToDelete = await Note.findByPk(noteId)
+      await noteToDelete.destroy()
+      
+      res.json(`/notes${noteId} successfully deleted`)
 }))
 
 module.exports = router
