@@ -7,7 +7,6 @@ import  { getNotesOfNotebook }  from '../../store/notes'
 export default function NotesList () {
       const dispatch = useDispatch()
       const { id:notebookId } = useParams()
-      console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',notebookId)
 
       useEffect(() => {
             dispatch(getNotesOfNotebook(notebookId))
