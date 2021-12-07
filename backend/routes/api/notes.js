@@ -28,4 +28,16 @@ router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       } else return res.json('No notes were found')
 }))
 
+// bringing in userId, title, content, optional notebookId
+router.post('/', asyncHandler(async(req, res) => {
+      const { userId, title, content, notebookId } = req.body
+      const newNote = await Note.create({
+            userId,
+            title,
+            content,
+            notebookId
+      })
+      return res.json(newNote)
+}))
+
 module.exports = router

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     notebookId: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.INTEGER
     },
     title: {
