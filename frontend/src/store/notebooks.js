@@ -14,10 +14,8 @@ const setNotebooks = (notebooks) => {
 // API is expecting to be handed one user object
 // useSelector to grab the user from state
 export const getNotebooks = (user) => async (dispatch) => {
-      const response = await csrfFetch(`/api/notebooks/user/${user.id}`
-      );
+      const response = await csrfFetch(`/api/notebooks/user/${user.id}`);
       const data = await response.json();
-      console.log('XXXXXXXXXXXXXX', data)
       dispatch(setNotebooks(data))
       return response;
 };

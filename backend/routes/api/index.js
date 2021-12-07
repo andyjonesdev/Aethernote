@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const notebooksRouter = require('./notebooks')
+const notesRouter = require('./notes')
 const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth.js');
@@ -11,6 +12,7 @@ const { restoreUser, requireAuth } = require('../../utils/auth.js');
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/notebooks', notebooksRouter)
+router.use('/notes', notesRouter)
 
 // test for frontend CSRF protection
 // router.post('/test', function(req, res) {
