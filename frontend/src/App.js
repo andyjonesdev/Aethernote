@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation/index";
 import NotebooksList from "./components/NotebooksList"
 import NotesList from "./components/NotesList"
 import * as sessionActions from "./store/session";
+import './components/NotebooksList/NotebookList.css'
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,11 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/notebooks/:id/notes" exact>
-            <NotesList />
+            <div className='page-content'>
+              <NotebooksList />
+              <NotesList />
+              {/*<NewNoteForm /> */}
+            </div>
           </Route>
           <Route path='/' exact>
             <>

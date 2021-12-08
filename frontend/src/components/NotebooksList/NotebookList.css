@@ -1,0 +1,40 @@
+* {
+      font-family: 'Rubik', sans-serif;
+}
+
+a {
+      text-decoration: none;
+}
+
+.page-content{
+      display: flex;
+}
+
+.notebooks-list{
+      width: 25%;
+      display: inline-block;
+      background-color:darkcyan
+}
+
+.notebooks {
+      display: block;
+      border-radius: 5px;
+      background-color: orange;
+      padding: 1%;
+      margin: 1%;
+}
+
+.notes-list {
+      width: 25%;
+}
+
+.notes {
+      border-radius: 5px;
+      background-color:blueviolet;
+      padding: 1%;
+      /* margin: 1%; */
+}
+
+.selected-notebook{
+      background-color: chartreuse;
+}
