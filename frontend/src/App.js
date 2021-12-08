@@ -7,6 +7,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation/index";
 import NotebooksList from "./components/NotebooksList"
 import NotesList from "./components/NotesList"
+import EditNoteForm from "./components/EditNoteForm/index"
 import * as sessionActions from "./store/session";
 import './components/NotebooksList/NotebookList.css'
 
@@ -42,7 +43,13 @@ function App() {
             <div className='page-content'>
               <NotebooksList />
               <NotesList />
-              {/*<NewNoteForm /> */}
+            </div>
+          </Route>
+          <Route path='/notebooks/:id/notes/:noteId' exact>
+            <div className='page-content'>
+              <NotebooksList />
+              <NotesList />
+              <EditNoteForm />
             </div>
           </Route>
           <Route path='/' exact>

@@ -1,10 +1,19 @@
 * {
+      list-style-type: none;
       font-family: 'Rubik', sans-serif;
 }
 
 a {
       text-decoration: none;
 }
+
+a:hover {
+      color:darkcyan;
+}
+
+/* .navigation{
+      background-color: salmon
+} */
 
 .page-content{
       display: flex;
@@ -13,7 +22,7 @@ a {
 .notebooks-list{
       width: 25%;
       display: inline-block;
-      background-color:darkcyan
+      /* background-color:darkcyan */
 }
 
 .notebooks {
@@ -26,15 +35,17 @@ a {
 
 .notes-list {
       width: 25%;
+      /* background-color:rgb(175, 57, 175); */
 }
 
 .notes {
+      display: block;
       border-radius: 5px;
       background-color:blueviolet;
       padding: 1%;
-      /* margin: 1%; */
+      margin: 1%;
 }
 
-.selected-notebook{
+.selected-notebook, .selected-note{
       background-color: chartreuse;
 }

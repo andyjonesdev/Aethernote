@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import '../NotebooksList/NotebookList.css'
+
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -24,7 +26,7 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <div id='navigation'>
+    <div className='navigation'>
       <ul>
         <li>
           <NavLink exact to="/">Home</NavLink>
