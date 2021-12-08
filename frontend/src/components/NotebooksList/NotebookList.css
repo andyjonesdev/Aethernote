@@ -11,9 +11,21 @@ a:hover {
       color:darkcyan;
 }
 
-/* .navigation{
-      background-color: salmon
-} */
+.navigation{
+      display:flex;
+      /* background-color: salmon */
+}
+
+.home-nav-section{
+      display:inline;
+      /* background-color:darkseagreen */
+}
+
+.notebook-nav-section{
+      display:flex;
+      align-items: center;
+      /* background-color:darkorchid; */
+}
 
 .page-content{
       display: flex;

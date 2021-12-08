@@ -3,33 +3,39 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
-
+import { getIndividualNote } from '../../store/notes'
 import '../NotebooksList/NotebookList.css'
 
 export default function EditNoteForm() {
-  const { noteId } = useParams()
+      const { noteId } = useParams()
+      const dispatch = useDispatch()
 
-  //use thunk to grab one note and set its title and contents
-  //as these default values
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [validationErrors, setValidationErrors] = useState([]);
+      useEffect(() => {
+            dispatch(getIndividualNote(noteId))
+            console.log('NOTE ID JUST CHANGED')
+            console.log(noteId)
+      }, [noteId])
+
+      const noteObj = useSelector(state => state.notes.noteToEdit)
+      const [title, setTitle] = useState(noteObj.title);
+      const [content, setContent] = useState(noteObj.content);
+      const [validationErrors, setValidationErrors] = useState([]);
 
 
-  useEffect(() => {
-      const validate = () => {
-          const validationErrors = [];
+      useEffect(() => {
+            const validate = () => {
+            const validationErrors = [];
 
-          if (!title) validationErrors.push('New title cannot be blank');
-          if (!content) validationErrors.push('New content cannot be blank');
+            if (!title) validationErrors.push('New title cannot be blank');
+            if (!content) validationErrors.push('New content cannot be blank');
 
-          return validationErrors;
-      }
-      const errors = validate();
-      if (errors.length > 0) {
-            setValidationErrors(errors)
-      } else setValidationErrors([]);
-  }, [title, content])
+            return validationErrors;
+            }
+            const errors = validate();
+            if (errors.length > 0) {
+                  setValidationErrors(errors)
+            } else setValidationErrors([]);
+      }, [title, content])
 
   const onSubmit = (e) => {
     e.preventDefault();
