@@ -1,0 +1,63 @@
+* {
+      list-style-type: none;
+      font-family: 'Rubik', sans-serif;
+}
+
+a {
+      text-decoration: none;
+}
+
+a:hover {
+      color:darkcyan;
+}
+
+.navigation{
+      display:flex;
+      /* background-color: salmon */
+}
+
+.home-nav-section{
+      display:inline;
+      /* background-color:darkseagreen */
+}
+
+.notebook-nav-section{
+      display:flex;
+      align-items: center;
+      /* background-color:darkorchid; */
+}
+
+.page-content{
+      display: flex;
+}
+
+.notebooks-list{
+      width: 25%;
+      display: inline-block;
+      /* background-color:darkcyan */
+}
+
+.notebooks {
+      display: block;
+      border-radius: 5px;
+      background-color: orange;
+      padding: 1%;
+      margin: 1%;
+}
+
+.notes-list {
+      width: 25%;
+      /* background-color:rgb(175, 57, 175); */
+}
+
+.notes {
+      display: block;
+      border-radius: 5px;
+      background-color:blueviolet;
+      padding: 1%;
+      margin: 1%;
+}
+
+.selected-notebook, .selected-note{
+      background-color: chartreuse;
+}

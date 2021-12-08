@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-// import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { getNotebooks } from '../../store/notebooks'
+import './NotebookList.css'
 
 export default function NotebooksList () {
       const dispatch = useDispatch()
@@ -15,11 +16,16 @@ export default function NotebooksList () {
 
       const notebookObjects =  useSelector(state => (state.notebooks.notebooks))
       const notebooks = notebookObjects?.map(object => {
-            return <div key={object.id}>{object.title}</div>
+            return <NavLink
+            to={`/notebooks/${object.id}/notes`}
+            key={object.id} className='notebooks'
+            activeClassName='selected-notebook'>
+            {object.title}
+            </NavLink>
       })
 
       return (
-      <div>
+      <div className='notebooks-list'>
             Notebooks
             {notebooks}
       </div>)

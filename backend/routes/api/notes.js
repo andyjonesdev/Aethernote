@@ -28,6 +28,15 @@ router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       } else return res.json('No notes were found')
 }))
 
+// GET a specific note
+router.get('/:id', asyncHandler(async(req, res) => {
+      const { id } = req.params
+      const foundNote = await Note.findByPk(id)
+      if (foundNote) {
+            return res.json(foundNote)
+      } else return res.json('Requested note could not be found')
+}))
+
 // Create a new Note using info supplied in req.body
 router.post('/', asyncHandler(async(req, res) => {
       const { userId, title, content, notebookId } = req.body
