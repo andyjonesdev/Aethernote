@@ -1,9 +1,9 @@
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
-import { getIndividualNote } from '../../store/notes'
+import { getIndividualNote, updateANote } from '../../store/notes'
 import '../NotebooksList/NotebookList.css'
 
 export default function EditNoteForm() {
@@ -11,15 +11,19 @@ export default function EditNoteForm() {
       const dispatch = useDispatch()
 
       useEffect(() => {
-            dispatch(getIndividualNote(noteId))
-            console.log('NOTE ID JUST CHANGED')
-            console.log(noteId)
+            dispatch(getIndividualNote(noteId)) //updates state.notes.noteToEdit
       }, [noteId])
 
-      const noteObj = useSelector(state => state.notes.noteToEdit)
+      const noteObj = useSelector(state => state.notes.noteToEdit) || {title: '', content: ''}
+
       const [title, setTitle] = useState(noteObj.title);
       const [content, setContent] = useState(noteObj.content);
       const [validationErrors, setValidationErrors] = useState([]);
+      useEffect(() => {
+            setTitle(noteObj.title)
+            setContent(noteObj.content)
+      }, [noteId, noteObj])
+
 
 
       useEffect(() => {
@@ -42,19 +46,16 @@ export default function EditNoteForm() {
 
     const updatedNote = {
       title,
-      content
+      content,
+      id: noteObj.id
     };
-    console.log(updatedNote)
-    //use my thunk, passing in the updatedNote
-    //API is looking for { title, content } from thunk
-    //maybe set title to whatever is in the Redux store for these
-//     setTitle('');
-//     setContent('');
+
+    dispatch(updateANote(updatedNote))
   };
 
   return (
     <div className='edit-note-form'>
-      <h2>Edit Note</h2>
+      <div>Edit Note</div>
       {validationErrors.length > 0 && (
         <div>
           The following errors were found:
@@ -63,31 +64,27 @@ export default function EditNoteForm() {
           </ul>
         </div>
       )}
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor='title'>Title</label>
+      <form spellcheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
+        <div className='edit-title-div'>
+          {/* <span className='.title-label'>Title</span> */}
+          <label className='title-label' htmlFor='title'>Title</label>
           <input
-            id='title'
+            name='title'
+            id='edit-note-title'
             type='text'
             onChange={(e) => {
                   setTitle(e.target.value)
-                  // console.log('THIS IS E.TARGET.VALUE', e.target.value)
-                  // console.log('THIS IS TITLE', title)
-                  // console.log('THIS IS VALIDATIONERRORS', validationErrors)
             }}
             value={title}
           />
         </div>
-        <div>
-            <label htmlFor='content'>Content</label>
+        <div className='edit-content-div'>
+            <label className='content-label' htmlFor='content'>Content</label>
             <textarea
-            id='content'
+            id='edit-note-content'
             name='content'
             onChange={(e) =>{
                   setContent(e.target.value)
-                  // console.log('THIS IS E.TARGET.VALUE', e.target.value)
-                  // console.log('THIS IS CONTENT', content)
-                  // console.log('THIS IS VALIDATIONERRORS', validationErrors)
             }}
             value={content}
             />
@@ -97,5 +94,3 @@ export default function EditNoteForm() {
     </div>
   );
 }
-
-//

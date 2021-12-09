@@ -49,7 +49,7 @@ function App() {
             <div className='page-content'>
               <NotebooksList />
               <NotesList />
-              <EditNoteForm />
+              <EditNoteForm noteAction='edit'/>
             </div>
           </Route>
           <Route path='/' exact>

@@ -1,7 +1,10 @@
 import { csrfFetch } from './csrf';
 
-const SET_NOTES = '/notes/SET_NOTES'
-const SET_NOTE = '/notes/SET_NOTE'
+const SET_NOTES = 'notes/SET_NOTES'
+const SET_NOTE = 'notes/SET_NOTE'
+const UPDATE_NOTE = 'notes/UPDATE_NOTE'
+const DELETE_NOTE = 'notes/DELETE_NOTE'
+
 // action creators
 const setNotes = (notes) => {
       return {
@@ -14,6 +17,20 @@ const setNote = (note) => {
   return {
     type: SET_NOTE,
     payload: note
+  }
+}
+
+const updateNote = (note) => {
+  return {
+    type: UPDATE_NOTE,
+    payload: note
+  }
+}
+
+const deleteNote = (noteId) => {
+  return {
+    type: DELETE_NOTE,
+    payload: noteId
   }
 }
 
@@ -35,7 +52,27 @@ export const getIndividualNote = (noteId) => async(dispatch) => {
   return
 }
 
-//making frontend component for note list
+// update a specified note
+export const updateANote = (updatedNote) => async(dispatch) => {
+  const { title, content, id } = updatedNote
+  const res = await csrfFetch(`/api/notes/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      title,
+      content
+    })
+  })
+  const data = await res.json()
+  dispatch(updateNote(data))
+}
+
+// delete a specified note
+export const deleteANote = (noteId) => async(dispatch) => {
+  const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE' })
+  const data = await res.json()
+
+  dispatch(deleteNote(data.noteId))
+}
 
 // juicer
 const initialState = { notes: null };
@@ -50,6 +87,20 @@ const notesReducer = (state = initialState, action) => {
       newState = Object.assign({}, state)
       newState.noteToEdit = action.payload;
       return newState
+    case UPDATE_NOTE:
+      newState = Object.assign({}, state)
+      const searchId = action.payload.id
+      newState.notes = [...state.notes];
+      const foundIndex = newState.notes.findIndex(noteObj => noteObj.id === searchId)
+      newState.notes[foundIndex] = action.payload
+      return newState
+    case DELETE_NOTE:
+      newState = Object.assign({}, state)
+      const deleteId = action.payload
+      newState.notes = [...state.notes];
+      const deleteIndex = newState.notes.findIndex(noteObj => noteObj.id === deleteId)
+      newState.notes.splice(deleteIndex, 1)
+      return newState;
     default:
       return state;
   }
