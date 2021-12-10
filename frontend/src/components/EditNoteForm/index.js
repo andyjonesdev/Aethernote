@@ -1,6 +1,6 @@
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
 import { getIndividualNote, updateANote } from '../../store/notes'
@@ -19,12 +19,11 @@ export default function EditNoteForm() {
       const [title, setTitle] = useState(noteObj.title);
       const [content, setContent] = useState(noteObj.content);
       const [validationErrors, setValidationErrors] = useState([]);
+
       useEffect(() => {
             setTitle(noteObj.title)
             setContent(noteObj.content)
       }, [noteId, noteObj])
-
-
 
       useEffect(() => {
             const validate = () => {
@@ -53,44 +52,44 @@ export default function EditNoteForm() {
     dispatch(updateANote(updatedNote))
   };
 
-  return (
-    <div className='edit-note-form'>
-      <div>Edit Note</div>
-      {validationErrors.length > 0 && (
-        <div>
-          The following errors were found:
-          <ul>
-            {validationErrors.map(error => <li key={error}>{error}</li>)}
-          </ul>
-        </div>
-      )}
-      <form spellcheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
-        <div className='edit-title-div'>
-          {/* <span className='.title-label'>Title</span> */}
-          <label className='title-label' htmlFor='title'>Title</label>
-          <input
-            name='title'
-            id='edit-note-title'
-            type='text'
-            onChange={(e) => {
-                  setTitle(e.target.value)
-            }}
-            value={title}
+return (
+  <div className='edit-note-form'>
+    <div className='list-title'>Edit Note</div>
+    {validationErrors.length > 0 && (
+      <div className='error-div'>
+        The following errors were found:
+        <ul>
+          {validationErrors.map(error => <li className='error-list-item' key={error}>{error}</li>)}
+        </ul>
+      </div>
+    )}
+    <form spellcheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
+      <div className='edit-title-div'>
+        {/* <span className='.title-label'>Title</span> */}
+        <label className='title-label' htmlFor='title'>Title</label>
+        <input
+          name='title'
+          id='edit-note-title'
+          type='text'
+          onChange={(e) => {
+                setTitle(e.target.value)
+          }}
+          value={title}
+        />
+      </div>
+      <div className='edit-content-div'>
+          <label className='content-label' htmlFor='content'>Content</label>
+          <textarea
+          id='edit-note-content'
+          name='content'
+          onChange={(e) =>{
+                setContent(e.target.value)
+          }}
+          value={content}
           />
-        </div>
-        <div className='edit-content-div'>
-            <label className='content-label' htmlFor='content'>Content</label>
-            <textarea
-            id='edit-note-content'
-            name='content'
-            onChange={(e) =>{
-                  setContent(e.target.value)
-            }}
-            value={content}
-            />
-        </div>
-        <button disabled={validationErrors.length}>Save Changes</button>
-      </form>
-    </div>
-  );
+      </div>
+      <button className='edit-form-button' disabled={validationErrors.length}>Save Changes</button>
+    </form>
+  </div>
+);
 }

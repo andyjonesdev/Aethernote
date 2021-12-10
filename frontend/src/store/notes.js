@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_NOTES = 'notes/SET_NOTES'
 const SET_NOTE = 'notes/SET_NOTE'
+const CREATE_NOTE = 'notes/CREATE_NOTE'
 const UPDATE_NOTE = 'notes/UPDATE_NOTE'
 const DELETE_NOTE = 'notes/DELETE_NOTE'
 
@@ -16,6 +17,13 @@ const setNotes = (notes) => {
 const setNote = (note) => {
   return {
     type: SET_NOTE,
+    payload: note
+  }
+}
+
+const createNote = (note) => {
+  return {
+    type: CREATE_NOTE,
     payload: note
   }
 }
@@ -66,6 +74,22 @@ export const updateANote = (updatedNote) => async(dispatch) => {
   dispatch(updateNote(data))
 }
 
+export const createANote = (newNote) => async(dispatch) => {
+  const { userId, title, content, notebookId } = newNote
+  console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZ', newNote)
+  const res = await csrfFetch('/api/notes', {
+    method: 'POST',
+    body: JSON.stringify({
+      userId,
+      title,
+      content,
+      notebookId
+    })
+  })
+  const data = await res.json()
+  dispatch(createNote(data))
+}
+
 // delete a specified note
 export const deleteANote = (noteId) => async(dispatch) => {
   const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE' })
@@ -86,6 +110,11 @@ const notesReducer = (state = initialState, action) => {
     case SET_NOTE:
       newState = Object.assign({}, state)
       newState.noteToEdit = action.payload;
+      return newState
+    case CREATE_NOTE:
+      newState = Object.assign({}, state)
+      newState.notes = [...state.notes]
+      newState.notes.push(action.payload)
       return newState
     case UPDATE_NOTE:
       newState = Object.assign({}, state)

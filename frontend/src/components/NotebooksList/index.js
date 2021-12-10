@@ -28,7 +28,9 @@ export default function NotebooksList () {
 
       return (
       <div className='notebooks-list'>
-            Notebooks
+            <div className='list-title'>
+            My Notebooks
+            </div>
             {notebooks}
       </div>)
 }

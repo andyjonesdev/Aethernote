@@ -11,22 +11,24 @@ a:hover {
       color:#9F5869;
 }
 
+button{
+      background-color:rgba(206, 221, 255, 0.9)
+}
+
 input, textarea{
       margin: 0 auto;
 }
 
+.make-me-relative{
+      position:relative;
+}
 
 .delete-note-button{
-      /* background-color: chartreuse; */
-      /* display: block; */
-      /* display: none; */
       display:block;
       visibility:hidden;
-      /* align-self: flex-end; */
-      position: absolute;
-      bottom: 1vh;
-      right: 0.5vw;
-      /* padding-bottom: 0; */
+      position:absolute;
+      bottom: 2vh;
+      right: 3.5vw;
 }
 
 
@@ -53,13 +55,21 @@ input, textarea{
 .page-content{
       display: flex;
       width: 100vw;
+      height: fit-content;
 }
 
 .notebooks-list, .notes-list{
       display:flex;
       flex-direction: column;
       width: 25%;
-      height: 90vh;
+      height: fit-content;
+}
+
+.list-title {
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      color: #D6C4F1;
+      text-align: center;
 }
 
 .title-of-note, .title-of-notebook{
@@ -83,7 +93,6 @@ input, textarea{
       border-radius: 5px;
       height: 10vh;
       padding: 1%;
-      margin: 1%;
       margin-top: 1vh;
       margin-bottom: 1vh;
       margin-left: 3vw;
@@ -93,7 +102,7 @@ input, textarea{
       box-shadow: 3px 3px 5px rgb(14,26,65);
 }
 
-.notes:hover .delete-note-button{
+.make-me-relative:hover .delete-note-button{
       visibility:visible;
 }
 
@@ -102,8 +111,25 @@ input, textarea{
       flex-direction: column;
       align-items: center;
       width: 48%;
-      /* background-image: url('https://pin.it/6Hn2c6N'); */
-      /* background-color:#0D0630; */
+      background-color:rgba(90, 55, 163, 0.9);
+      border-radius: 10px;
+}
+
+.error-div{
+      margin-top: 1vh;
+      color: red;
+}
+
+.error-list-item{
+      list-style-type:disc;
+}
+
+.add-note-button{
+      margin-top: 1vh;
+      margin-left: 3vw;
+      margin-right: 3vw;
+      height: 5vh;
+      background-color:rgba(206, 221, 255, 0.9)
 }
 
 .edit-note-form-form{
@@ -115,29 +141,34 @@ input, textarea{
 }
 
 .edit-title-div{
-      /* display: flex; */
       align-items: center;
-      /* width: 80%; */
-      /* background-color:dimgrey */
 }
 
-/* .edit-content-div{
-      background-color:dodgerblue
-} */
 
 #edit-note-title{
+      margin-top:1vh;
+      margin-bottom:1vh;
       display: flex;
       border-radius: 5px;
       width: 100%;
       height: 3vh;
-      /* background-color:forestgreen */
+      background-color:rgba(130,164,246, 0.9)
 }
 
 #edit-note-content{
+      margin-top:1vh;
+      margin-bottom:1vh;
+      resize: none;
       display: block;
       border-radius: 5px;
       width: 100%;
       height: 60vh;
+      background-color:rgba(130,164,246, 0.9)
+}
+
+.create-note-button, .edit-form-button{
+      height: 4vh;
+      margin-bottom: 1vh;
 }
 
 .selected-notebook, .selected-note{
