@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import LoginFormPage from './components/LoginFormModal';
 import SignupFormPage from "./components/SignupFormPage";
-import Navigation from "./components/Navigation/index";
+import Navigation from "./components/Navigation";
 import NotebooksList from "./components/NotebooksList"
 import NotesList from "./components/NotesList"
-import EditNoteForm from "./components/EditNoteForm/index"
+import EditNoteForm from "./components/EditNoteForm"
+import CreateNoteForm from "./components/CreateNoteForm"
 import * as sessionActions from "./store/session";
 import './components/NotebooksList/NotebookList.css'
 
@@ -43,13 +44,14 @@ function App() {
             <div className='page-content'>
               <NotebooksList />
               <NotesList />
+              <CreateNoteForm />
             </div>
           </Route>
           <Route path='/notebooks/:id/notes/:noteId' exact>
             <div className='page-content'>
               <NotebooksList />
               <NotesList />
-              <EditNoteForm />
+              <EditNoteForm/>
             </div>
           </Route>
           <Route path='/' exact>

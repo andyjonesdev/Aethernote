@@ -38,15 +38,24 @@ router.get('/:id', asyncHandler(async(req, res) => {
 }))
 
 // Create a new Note using info supplied in req.body
-router.post('/', asyncHandler(async(req, res) => {
+router.post('/', asyncHandler(async(req, res, next) => {
       const { userId, title, content, notebookId } = req.body
-      const newNote = await Note.create({
-            userId,
-            title,
-            content,
-            notebookId
-      })
-      return res.json(newNote)
+      console.log('USERID WHEN IT GETS TO API ROUTE', userId)
+      if (userId === undefined) {
+            const createError = new Error('You must login before creating a note')
+            createError.status = 401
+            createError.title = ('Server fetch rejected')
+            createError.errors = ['You must login before creating a note']
+            return next(createError)
+      } else {
+            const newNote = await Note.create({
+                  userId,
+                  title,
+                  content,
+                  notebookId
+            })
+            return res.json(newNote)
+      }
 }))
 
 
@@ -73,7 +82,7 @@ router.delete('/:id', asyncHandler(async(req, res) => {
       const { id:noteId } = req.params;
       const noteToDelete = await Note.findByPk(noteId)
       await noteToDelete.destroy()
-      res.json(`/notes/${noteId} successfully deleted`)
+      return res.json({noteId , message: 'success'})
 }))
 
 module.exports = router

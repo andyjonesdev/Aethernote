@@ -20,13 +20,17 @@ export default function NotebooksList () {
             to={`/notebooks/${object.id}/notes`}
             key={object.id} className='notebooks'
             activeClassName='selected-notebook'>
+            <div className='title-of-notebook'>
             {object.title}
+            </div>
             </NavLink>
       })
 
       return (
       <div className='notebooks-list'>
-            Notebooks
+            <div className='list-title'>
+            My Notebooks
+            </div>
             {notebooks}
       </div>)
 }
