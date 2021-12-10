@@ -40,7 +40,6 @@ router.get('/:id', asyncHandler(async(req, res) => {
 // Create a new Note using info supplied in req.body
 router.post('/', asyncHandler(async(req, res, next) => {
       const { userId, title, content, notebookId } = req.body
-      console.log('USERID WHEN IT GETS TO API ROUTE', userId)
       if (userId === undefined) {
             const createError = new Error('You must login before creating a note')
             createError.status = 401
@@ -60,10 +59,20 @@ router.post('/', asyncHandler(async(req, res, next) => {
 
 
 // Update a Note's title and/or content in DB
-router.patch('/:id', asyncHandler(async(req, res) => {
+router.patch('/:id', asyncHandler(async(req, res, next) => {
       const { id:noteId } = req.params
       const noteToEdit = await Note.findByPk(noteId)
-      const { title, content } = req.body
+      const { title, content, sessionUserId } = req.body
+      console.log('SESSIONUSERID IN API', sessionUserId)
+
+      if (sessionUserId !== noteToEdit.userId) {
+            const editError = new Error('You are not authorized to edit this note')
+            editError.status = 401
+            editError.title = ('Server fetch rejected')
+            editError.errors = ['You are not authorized to edit this note']
+            return next(editError)
+      }
+
       // We either update both fields, update title, or update content
       if (title === null) {
             await noteToEdit.update({
@@ -80,9 +89,18 @@ router.patch('/:id', asyncHandler(async(req, res) => {
 // Delete a Note from DB
 router.delete('/:id', asyncHandler(async(req, res) => {
       const { id:noteId } = req.params;
+      const { sessionUserId } = req.body
       const noteToDelete = await Note.findByPk(noteId)
-      await noteToDelete.destroy()
-      return res.json({noteId , message: 'success'})
+      if (noteToDelete.userId !== sessionUserId) {
+            const deleteError = new Error('You are not authorized to delete this note')
+            deleteError.status = 401
+            deleteError.title = ('Server fetch rejected')
+            deleteError.errors = ['You are not authorized to delete this note']
+            return next(deleteError)
+      } else {
+            await noteToDelete.destroy()
+            return res.json({noteId, message: 'success'})
+      }
 }))
 
 module.exports = router

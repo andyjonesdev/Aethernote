@@ -62,12 +62,14 @@ export const getIndividualNote = (noteId) => async(dispatch) => {
 
 // update a specified note
 export const updateANote = (updatedNote) => async(dispatch) => {
-  const { title, content, id } = updatedNote
+  const { title, content, id, sessionUserId } = updatedNote
+  console.log('SESSIONUSERID IN THUNK', sessionUserId)
   const res = await csrfFetch(`/api/notes/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({
       title,
-      content
+      content,
+      sessionUserId
     })
   })
   const data = await res.json()
@@ -76,7 +78,6 @@ export const updateANote = (updatedNote) => async(dispatch) => {
 
 export const createANote = (newNote) => async(dispatch) => {
   const { userId, title, content, notebookId } = newNote
-  console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZ', newNote)
   const res = await csrfFetch('/api/notes', {
     method: 'POST',
     body: JSON.stringify({
@@ -91,8 +92,8 @@ export const createANote = (newNote) => async(dispatch) => {
 }
 
 // delete a specified note
-export const deleteANote = (noteId) => async(dispatch) => {
-  const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE' })
+export const deleteANote = (noteId, sessionUserId) => async(dispatch) => {
+  const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE', body: JSON.stringify({sessionUserId})})
   const data = await res.json()
 
   dispatch(deleteNote(data.noteId))
@@ -107,15 +108,18 @@ const notesReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState.notes = action.payload;
       return newState;
+
     case SET_NOTE:
       newState = Object.assign({}, state)
       newState.noteToEdit = action.payload;
       return newState
+
     case CREATE_NOTE:
       newState = Object.assign({}, state)
       newState.notes = [...state.notes]
       newState.notes.push(action.payload)
       return newState
+
     case UPDATE_NOTE:
       newState = Object.assign({}, state)
       const searchId = action.payload.id
@@ -123,6 +127,7 @@ const notesReducer = (state = initialState, action) => {
       const foundIndex = newState.notes.findIndex(noteObj => noteObj.id === searchId)
       newState.notes[foundIndex] = action.payload
       return newState
+
     case DELETE_NOTE:
       newState = Object.assign({}, state)
       const deleteId = action.payload

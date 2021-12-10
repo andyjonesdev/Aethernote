@@ -9,6 +9,7 @@ export default function NotesList () {
       const { id:notebookId } = useParams()
       const history = useHistory()
 
+      const sessionUserId = useSelector(state => (state.session.user)).id
       useEffect(() => {
             dispatch(getNotesOfNotebook(notebookId))
       }, [notebookId, dispatch])
@@ -33,7 +34,7 @@ export default function NotesList () {
                         </NavLink>
                         <button
                         onClick={e => {
-                        dispatch(deleteANote(object.id))
+                        dispatch(deleteANote(object.id, sessionUserId))
                         history.push(`/notebooks/${object.notebookId}/notes`)
                         }}
                         className='delete-note-button'>
