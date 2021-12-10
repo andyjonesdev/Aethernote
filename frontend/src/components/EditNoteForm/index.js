@@ -10,6 +10,8 @@ export default function EditNoteForm() {
       const { noteId } = useParams()
       const dispatch = useDispatch()
 
+      const sessionUserId = useSelector(state => (state.session.user)).id
+
       useEffect(() => {
             dispatch(getIndividualNote(noteId)) //updates state.notes.noteToEdit
       }, [noteId])
@@ -44,6 +46,7 @@ export default function EditNoteForm() {
     e.preventDefault();
 
     const updatedNote = {
+      sessionUserId,
       title,
       content,
       id: noteObj.id
