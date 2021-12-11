@@ -10,7 +10,6 @@ import '../NotebooksList/NotebookList.css'
 export default function CreateNoteForm() {
       const { id:notebookId } = useParams()
       const dispatch = useDispatch()
-      const userId = useSelector(state => state.session.user.id)
 
       const [title, setTitle] = useState('');
       const [content, setContent] = useState('');
@@ -35,12 +34,10 @@ export default function CreateNoteForm() {
     e.preventDefault();
 
     const newNote = {
-      userId,
       title,
       content,
       notebookId
     };
-    console.log('USERID WHEN THUNK IS DISPATCHED', userId)
     dispatch(createANote(newNote))
   };
 

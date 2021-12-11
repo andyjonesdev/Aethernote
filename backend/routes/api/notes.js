@@ -38,13 +38,19 @@ router.get('/:id', asyncHandler(async(req, res) => {
 }))
 
 // Create a new Note using info supplied in req.body
-router.post('/', asyncHandler(async(req, res, next) => {
-      const { userId, title, content, notebookId } = req.body
+router.post('/', restoreUser, asyncHandler(async(req, res, next) => {
+      const {title, content, notebookId } = req.body
+
+      const createError = new Error('You must login before creating a note')
+      createError.status = 401
+      createError.title = ('Server fetch rejected')
+      createError.errors = ['You must login before creating a note']
+
+      if (!req.user) return next(createError)
+
+      const userId = req.user.id
+
       if (userId === undefined) {
-            const createError = new Error('You must login before creating a note')
-            createError.status = 401
-            createError.title = ('Server fetch rejected')
-            createError.errors = ['You must login before creating a note']
             return next(createError)
       } else {
             const newNote = await Note.create({
@@ -59,11 +65,11 @@ router.post('/', asyncHandler(async(req, res, next) => {
 
 
 // Update a Note's title and/or content in DB
-router.patch('/:id', asyncHandler(async(req, res, next) => {
+router.patch('/:id', restoreUser, asyncHandler(async(req, res, next) => {
       const { id:noteId } = req.params
       const noteToEdit = await Note.findByPk(noteId)
-      const { title, content, sessionUserId } = req.body
-      console.log('SESSIONUSERID IN API', sessionUserId)
+      const { title, content } = req.body
+      const sessionUserId = req.user.id
 
       if (sessionUserId !== noteToEdit.userId) {
             const editError = new Error('You are not authorized to edit this note')
@@ -87,15 +93,20 @@ router.patch('/:id', asyncHandler(async(req, res, next) => {
 }))
 
 // Delete a Note from DB
-router.delete('/:id', asyncHandler(async(req, res) => {
+router.delete('/:id', restoreUser, asyncHandler(async(req, res, next) => {
       const { id:noteId } = req.params;
-      const { sessionUserId } = req.body
+
+      const deleteError = new Error('You are not authorized to delete this note')
+      deleteError.status = 401
+      deleteError.title = ('Server fetch rejected')
+      deleteError.errors = ['You are not authorized to delete this note']
+
+      if (!req.user) {
+            return next(deleteError)
+      }
+      const sessionUserId = req.user.id
       const noteToDelete = await Note.findByPk(noteId)
       if (noteToDelete.userId !== sessionUserId) {
-            const deleteError = new Error('You are not authorized to delete this note')
-            deleteError.status = 401
-            deleteError.title = ('Server fetch rejected')
-            deleteError.errors = ['You are not authorized to delete this note']
             return next(deleteError)
       } else {
             await noteToDelete.destroy()

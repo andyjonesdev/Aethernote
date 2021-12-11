@@ -21,15 +21,15 @@ app.use(express.json());            //parsing JSON bodies of requests with Conte
 app.use(helmet({                    //helps set a variety of headers to better secure app
       contentSecurityPolicy: false
 }));
-app.use(
-      csurf({
-        cookie: {
-          secure: isProduction,
-          sameSite: isProduction && "Lax",
-          httpOnly: true
-        }
-      })
-);
+// app.use(
+//       csurf({
+//         cookie: {
+//           secure: isProduction,
+//           sameSite: isProduction && "Lax",
+//           httpOnly: true
+//         }
+//       })
+// );
 if (!isProduction) {
   app.use(cors());
 }

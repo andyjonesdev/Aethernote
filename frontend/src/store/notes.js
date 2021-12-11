@@ -62,14 +62,12 @@ export const getIndividualNote = (noteId) => async(dispatch) => {
 
 // update a specified note
 export const updateANote = (updatedNote) => async(dispatch) => {
-  const { title, content, id, sessionUserId } = updatedNote
-  console.log('SESSIONUSERID IN THUNK', sessionUserId)
+  const { title, content, id  } = updatedNote
   const res = await csrfFetch(`/api/notes/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({
       title,
-      content,
-      sessionUserId
+      content
     })
   })
   const data = await res.json()
@@ -77,11 +75,10 @@ export const updateANote = (updatedNote) => async(dispatch) => {
 }
 
 export const createANote = (newNote) => async(dispatch) => {
-  const { userId, title, content, notebookId } = newNote
+  const { title, content, notebookId } = newNote
   const res = await csrfFetch('/api/notes', {
     method: 'POST',
     body: JSON.stringify({
-      userId,
       title,
       content,
       notebookId
@@ -93,7 +90,7 @@ export const createANote = (newNote) => async(dispatch) => {
 
 // delete a specified note
 export const deleteANote = (noteId, sessionUserId) => async(dispatch) => {
-  const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE', body: JSON.stringify({sessionUserId})})
+  const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE'})
   const data = await res.json()
 
   dispatch(deleteNote(data.noteId))

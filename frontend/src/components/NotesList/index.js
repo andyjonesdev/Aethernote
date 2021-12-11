@@ -34,7 +34,7 @@ export default function NotesList () {
                         </NavLink>
                         <button
                         onClick={e => {
-                        dispatch(deleteANote(object.id, sessionUserId))
+                        dispatch(deleteANote(object.id))
                         history.push(`/notebooks/${object.notebookId}/notes`)
                         }}
                         className='delete-note-button'>
