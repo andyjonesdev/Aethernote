@@ -1,5 +1,3 @@
-//TODO mount in App.js
-
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';

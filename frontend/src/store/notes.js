@@ -47,7 +47,7 @@ const deleteNote = (noteId) => {
 export const getNotesOfNotebook = (notebookId) => async(dispatch) => {
   const res = await csrfFetch(`/api/notes/notebooks/${notebookId}`);
   const data = await res.json();
-  dispatch(setNotes(data));
+  dispatch(setNotes(data));  //data is notes array
   return;
 }
 
@@ -89,14 +89,14 @@ export const createANote = (newNote) => async(dispatch) => {
 }
 
 // delete a specified note
-export const deleteANote = (noteId, sessionUserId) => async(dispatch) => {
+export const deleteANote = (noteId) => async(dispatch) => {
   const res = await csrfFetch(`/api/notes/${noteId}`, { method: 'DELETE'})
   const data = await res.json()
 
   dispatch(deleteNote(data.noteId))
 }
 
-// juicer
+// reducer
 const initialState = { notes: null };
 const notesReducer = (state = initialState, action) => {
   let newState;
