@@ -25,7 +25,7 @@ router.get('/notebooks/:id', asyncHandler(async(req, res) => {
       })
       if (foundNotes.length > 0) {
             return res.json(foundNotes)
-      } else return res.json('No notes were found')
+      } else return res.json([])
 }))
 
 // GET a specific note
@@ -40,7 +40,6 @@ router.get('/:id', asyncHandler(async(req, res) => {
 // Create a new Note using info supplied in req.body
 router.post('/', restoreUser, asyncHandler(async(req, res, next) => {
       const {title, content, notebookId } = req.body
-
       const createError = new Error('You must login before creating a note')
       createError.status = 401
       createError.title = ('Server fetch rejected')
@@ -101,9 +100,8 @@ router.delete('/:id', restoreUser, asyncHandler(async(req, res, next) => {
       deleteError.title = ('Server fetch rejected')
       deleteError.errors = ['You are not authorized to delete this note']
 
-      if (!req.user) {
-            return next(deleteError)
-      }
+      if (!req.user) return next(deleteError)
+      
       const sessionUserId = req.user.id
       const noteToDelete = await Note.findByPk(noteId)
       if (noteToDelete.userId !== sessionUserId) {

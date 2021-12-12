@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
 
-import { getNotebooks, createANotebook, deleteANotebook } from '../../store/notebooks'
+import { getNotebooks, createANotebook, editANotebook, deleteANotebook } from '../../store/notebooks'
 import './NotebookList.css'
 
 export default function NotebooksList () {
@@ -55,6 +55,14 @@ export default function NotebooksList () {
             <button onClick={() => {
                   dispatch(createANotebook('Test Notebook'))
             }} className='add-note-button'>Add Notebook </button>
+            <button
+            className='add-note-button'
+            onClick={() => {
+                  dispatch(editANotebook({ notebookId: 12, title: 'New Short Title Test' }))
+            }}
+            >
+                  Test Edit Notebook
+            </button>
             {notebooks}
       </div>)
 }

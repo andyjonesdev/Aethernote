@@ -3,6 +3,7 @@ import notesReducer from './notes'
 
 const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS'
 const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK'
+const UPDATE_NOTEBOOK = 'notebooks/UPDATE_NOTEBOOK'
 const DELETE_NOTEBOOK = 'notebooks/DELETE_NOTEBOOK'
 
 //action creators
@@ -17,6 +18,13 @@ const createNotebook = (newNotebook) => {
   return {
     type: CREATE_NOTEBOOK,
     payload: newNotebook
+  }
+}
+
+const updateNotebook = (notebook) => {
+  return {
+    type: UPDATE_NOTEBOOK,
+    payload: notebook
   }
 }
 
@@ -46,6 +54,16 @@ export const createANotebook = (title) => async(dispatch) => {
   dispatch(createNotebook(data))  //data is the NEW Notebook Object
 }
 
+export const editANotebook = (updatedNotebook) => async(dispatch) => {
+  const { notebookId, title } = updatedNotebook
+  const res = await csrfFetch(`/api/notebooks/${notebookId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ title })
+  })
+  const data = await res.json()
+  dispatch(updateNotebook(data))
+}
+
 export const deleteANotebook = (notebookId) => async(dispatch) => {
   const res = await csrfFetch(`/api/notebooks/${notebookId}`, { method: 'DELETE' })
   const data = await res.json()
@@ -69,6 +87,14 @@ const notebooksReducer = (state = initialState, action) => {
       newState.notebooks.push(action.payload)
       return newState;
 
+    case UPDATE_NOTEBOOK:
+      newState = Object.assign({}, state)
+      const searchId = action.payload.id
+      newState.notebooks = [...state.notebooks];
+      const foundIndex = newState.notebooks.findIndex(notebookObj => notebookObj.id === searchId)
+      newState.notebooks[foundIndex] = action.payload
+      return newState
+      
     case DELETE_NOTEBOOK:
       newState = Object.assign({}, state)
       const deleteId = action.payload
