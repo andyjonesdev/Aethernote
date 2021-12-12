@@ -12,7 +12,12 @@ a:hover {
 }
 
 button{
+      cursor: pointer;
       background-color:rgba(206, 221, 255, 0.9)
+}
+
+button:hover{
+      background-color:rgba(163, 189, 250, 0.9)
 }
 
 input, textarea{
@@ -23,7 +28,7 @@ input, textarea{
       position:relative;
 }
 
-.delete-note-button{
+.delete-note-button, .edit-note-button{
       display:block;
       visibility:hidden;
       position:absolute;
@@ -31,6 +36,9 @@ input, textarea{
       right: 3.5vw;
 }
 
+.edit-note-button {
+      right: 5.5vw;
+}
 
 .title-label, .content-label{
       display:block;
@@ -103,6 +111,10 @@ input, textarea{
 }
 
 .make-me-relative:hover .delete-note-button{
+      visibility:visible;
+}
+
+.make-me-relative:hover .edit-note-button{
       visibility:visible;
 }
 

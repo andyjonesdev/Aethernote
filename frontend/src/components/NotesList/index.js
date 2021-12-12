@@ -9,7 +9,6 @@ export default function NotesList () {
       const { id:notebookId } = useParams()
       const history = useHistory()
 
-      const sessionUserId = useSelector(state => (state.session.user)).id
       useEffect(() => {
             dispatch(getNotesOfNotebook(notebookId))
       }, [notebookId, dispatch])

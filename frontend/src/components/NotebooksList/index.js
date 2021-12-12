@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
-import { getNotebooks } from '../../store/notebooks'
+import { getNotebooks, createANotebook, deleteANotebook } from '../../store/notebooks'
 import './NotebookList.css'
 
 export default function NotebooksList () {
       const dispatch = useDispatch()
+      const history = useHistory()
 
       const user = useSelector(state => (state.session.user))
 
@@ -16,14 +17,34 @@ export default function NotebooksList () {
 
       const notebookObjects =  useSelector(state => (state.notebooks.notebooks))
       const notebooks = notebookObjects?.map(object => {
-            return <NavLink
-            to={`/notebooks/${object.id}/notes`}
-            key={object.id} className='notebooks'
-            activeClassName='selected-notebook'>
-            <div className='title-of-notebook'>
-            {object.title}
+            return(
+            <div className='make-me-relative'>
+                  <NavLink
+                  to={`/notebooks/${object.id}/notes`}
+                  key={object.id} className='notebooks'
+                  activeClassName='selected-notebook'>
+                        <div className='title-of-notebook'>
+                        {object.title}
+                        </div>
+                  </NavLink>
+                  <button
+                  onClick={() => {
+                  dispatch(deleteANotebook(+object.id))
+                  history.push(`/notebooks`)
+                  }}
+                  className='delete-note-button'>
+                  <i className="far fa-trash-alt"></i>
+                  </button>
+                  <button
+                  onClick={() => {
+                  dispatch(deleteANotebook(+object.id))
+                  history.push(`/notebooks`)
+                  }}
+                  className='edit-note-button'>
+                  <i class="far fa-edit"></i>
+                  </button>
             </div>
-            </NavLink>
+            )
       })
 
       return (
@@ -31,6 +52,9 @@ export default function NotebooksList () {
             <div className='list-title'>
             My Notebooks
             </div>
+            <button onClick={() => {
+                  dispatch(createANotebook('Test Notebook'))
+            }} className='add-note-button'>Add Notebook </button>
             {notebooks}
       </div>)
 }
