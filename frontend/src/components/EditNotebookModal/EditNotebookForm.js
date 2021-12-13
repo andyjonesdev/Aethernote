@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { editANotebook } from '../../store/notebooks'
 import '../LoginFormModal/LoginForm.css'
 
-function EditNotebookForm({ notebookId, title:prevTitle }) {
+function EditNotebookForm({ notebookId, title:prevTitle, setShowModal }) {
   const dispatch = useDispatch();
   const history = useHistory()
   const [title, setTitle] = useState('');
@@ -21,7 +21,8 @@ function EditNotebookForm({ notebookId, title:prevTitle }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editANotebook({notebookId}))
+    dispatch(editANotebook({notebookId, title}))
+    setShowModal(false)
     history.push(`/notebooks`)
     // setErrors([]);
     // return dispatch(sessionActions.login({ credential, password }))
@@ -46,7 +47,7 @@ function EditNotebookForm({ notebookId, title:prevTitle }) {
           required
         />
       </label>
-      <button type="submit">Update</button>
+      <button disabled={errors.length} type="submit">Update</button>
     </form>
   );
 }

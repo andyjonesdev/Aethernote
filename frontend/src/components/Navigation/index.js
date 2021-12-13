@@ -27,7 +27,7 @@ function Navigation({ isLoaded }){
     //if user, session links is NAME and LOGOUT
     sessionLinks = (
       <div className='session-links'>
-        <p className='welcome-text'>Welcome, {sessionUser.username}</p>
+        <p className='welcome-text'>Welcome, {sessionUser.username}!</p>
         <button className='logout-button' onClick={logout}>Log Out</button>
       </div>
     )

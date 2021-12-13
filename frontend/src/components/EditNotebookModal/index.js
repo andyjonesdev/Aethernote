@@ -15,7 +15,7 @@ function EditNotebookModal({ notebookId, title }) {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className='modal-upper-left'>Rename Notebook</div>
-          <EditNotebookForm notebookId={notebookId} title={title}/>
+          <EditNotebookForm notebookId={notebookId} title={title} setShowModal={setShowModal}/>
         </Modal>
       )}
     </div>

@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
 import { createANotebook } from '../../store/notebooks'
 import '../../components/NotebooksList/NotebookList.css'
 
-function AddNotebookForm() {
+function AddNotebookForm({ setShowModal }) {
   const dispatch = useDispatch();
   const history = useHistory()
   const [title, setTitle] = useState('');
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+      const errors = []
+      if (!title.length) errors.push('Title cannot be blank')
+      if (title.length > 30) errors.push('Title must be shorter than 30 characters')
+      setErrors(errors)
+  }, [title])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createANotebook(title))
+    setShowModal(false)
     history.push(`/notebooks`)
   }
 
@@ -33,7 +41,7 @@ function AddNotebookForm() {
           required
         />
       </label>
-      <button type="submit">Create</button>
+      <button disabled={errors.length} type="submit">Create</button>
     </form>
   );
 }
