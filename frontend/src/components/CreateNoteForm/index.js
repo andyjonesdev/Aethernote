@@ -50,7 +50,7 @@ export default function CreateNoteForm() {
             </ul>
             </div>
       )}
-      <form spellcheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
+      <form spellCheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
             <div className='edit-title-div'>
                   <label className='title-label' htmlFor='title'>Title</label>
                   <input

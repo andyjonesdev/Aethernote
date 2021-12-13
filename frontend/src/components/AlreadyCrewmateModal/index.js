@@ -7,7 +7,7 @@ function AlreadyCrewmateModal() {
 
   return (
     <>
-      <button class='splash-button' onClick={() => setShowModal(true)}>Already a crewmate? Login</button>
+      <button className='splash-button' onClick={() => setShowModal(true)}>Already a crewmate? Login</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <LoginForm />

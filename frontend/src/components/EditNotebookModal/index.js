@@ -10,7 +10,7 @@ function EditNotebookModal({ notebookId, title }) {
   return (
     <div className='edit-note-button'>
       <button onClick={() => setShowModal(true)}>
-        <i class="far fa-edit"></i>
+        <i className="far fa-edit"></i>
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

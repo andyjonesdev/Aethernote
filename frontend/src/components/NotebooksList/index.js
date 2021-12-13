@@ -22,10 +22,6 @@ export default function NotebooksList () {
             } else setTryToLoad(true)
       }, [])
 
-      // useEffect(() => {
-      //       if (user) setTryToLoad(true)
-      // }, [user])
-
       useEffect(() => {
             if (tryToLoad) {
                   dispatch(getNotebooks(user))
@@ -40,7 +36,7 @@ export default function NotebooksList () {
       if (notebookObjects.length) {
             notebooks = notebookObjects?.map(object => {
                   return(
-                  <div className='make-me-relative'>
+                  <div key={object.id} className='make-me-relative'>
                         <NavLink
                         to={`/notebooks/${object.id}/notes`}
                         key={object.id} className='notebooks'

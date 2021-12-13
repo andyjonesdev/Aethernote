@@ -63,7 +63,7 @@ return (
         </ul>
       </div>
     )}
-    <form spellcheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
+    <form spellCheck='false' className='edit-note-form-form' action='/' onSubmit={onSubmit}>
       <div className='edit-title-div'>
         {/* <span className='.title-label'>Title</span> */}
         <label className='title-label' htmlFor='title'>Title</label>
