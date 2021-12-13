@@ -20,7 +20,7 @@ router.get('/user/:id', asyncHandler(async (req, res) => { //displays the logged
 
       if (notebooks.length > 0) {
             return res.json(notebooks)
-      } else return res.json('No notebooks were found')
+      } else return res.json([])
 }))
 
 router.post('/', restoreUser, asyncHandler(async(req, res, next) => {

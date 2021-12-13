@@ -21,22 +21,24 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+    <form className='modal-form' onSubmit={handleSubmit}>
+      <ul className='modal-errors-list'>
+        {errors.map((error, idx) => <li className='modal-errors' key={idx}>{error}</li>)}
       </ul>
-      <label>
+      <label className='modal-form-label'>
         Username or Email
         <input
+          className='modal-form-input'
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='modal-form-label'>
         Password
         <input
+          className='modal-form-input'
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

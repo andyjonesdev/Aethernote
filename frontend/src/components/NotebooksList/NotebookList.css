@@ -46,8 +46,70 @@ input, textarea{
       color: #B5C2B7;
 }
 
+#logo{
+     position: relative;
+     left: 0.5vw;
+}
+
+.splash-text{
+      color: transparent;
+      background-image: url(https://img.freepik.com/free-vector/pastel-color-watercolor-stain-background_52683-12283.jpg?size=626&ext=jpg);
+      background-size: cover;
+      background-position: center;
+      -moz-background-clip: text;
+      -webkit-background-clip: text;
+      font-size: 175px;
+      font-family: 'Lato', sans-serif;
+      margin-bottom: 10%;
+}
+
+.splash-content{
+      bottom: 2vh;
+      position: relative;
+      margin-left: 5vw;
+}
+
+.splash-p{
+      color: transparent;
+      background-image: url(https://img.freepik.com/free-vector/pastel-color-watercolor-stain-background_52683-12283.jpg?size=626&ext=jpg);
+      background-size: cover;
+      background-position: center;
+      -moz-background-clip: text;
+      -webkit-background-clip: text;
+      font-family: 'Lato', sans-serif;
+      font-size: 50px;
+      margin-bottom: 2vh;
+}
+
+.splash-button{
+      border-radius: 5px;
+      margin-right: 10px;
+      padding: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
+      background-color:rgba(206, 221, 255, 0.9);
+      font-size: 25px;
+      font-family: 'Lato', sans-serif;
+}
+
+#notebooks-text {
+      /* background-color: white; */
+      color: white;
+}
+
 .navigation{
       display:flex;
+      align-items: center;
+      justify-content: space-between;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6vh;
+      width: 100vw;
+      max-width: 100%;
       background-color:rgba(0,179,244,0.4);
 }
 
@@ -60,17 +122,70 @@ input, textarea{
       align-items: center;
 }
 
+#notebooks-text{
+      font-size: 20px;
+      color: #D6C4F1;
+}
+
+.search-nav-input{
+      border:1px solid black;
+      /* background-color:rgba(130,164,246, 1); */
+      height: fit-content;
+      width: 20vw;
+      font-size: 20px;
+      border-radius: 5px;
+      padding: 5px;
+}
+
+.demo-button{
+      margin-right: 1vw;
+}
+
+.demo-button-nav-section{
+      display: inline;
+}
+
+.welcome-text{
+      color:#C1CBF3;
+      display: inline;
+      font-size: 20px;
+}
+
+
+.navigation button{
+      font-size: 20px;
+      border-radius: 5px;
+      margin-left: 1.5vw;
+      padding: 5px;
+      padding-right: 0.8vw;
+      padding-left: 0.8vw;
+}
+
+.logout-button{
+      margin-left: 1.5vw;
+      margin-right: 1.5vw;
+      display: inline;
+}
+
 .page-content{
       display: flex;
+      position: relative;
+      top: 6vh;
       width: 100vw;
       height: fit-content;
 }
+
+#user{
+      display: none;
+}
+
 
 .notebooks-list, .notes-list{
       display:flex;
       flex-direction: column;
       width: 25%;
       height: fit-content;
+      overflow: auto;
 }
 
 .list-title {
@@ -78,6 +193,11 @@ input, textarea{
       padding-bottom: 1vh;
       color: #D6C4F1;
       text-align: center;
+      border-radius: 5px;
+      margin-top: 1vh;
+      margin-left: 3vw;
+      margin-right: 3vw;
+      background-color:rgba(90, 55, 163, 0.9);
 }
 
 .title-of-note, .title-of-notebook{
@@ -120,6 +240,11 @@ input, textarea{
 
 .edit-note-form {
       display: flex;
+      position: fixed;
+      top: 7vh;
+      right: 0.5vw;
+      bottom: 2vh;
+      height: fit-content;
       flex-direction: column;
       align-items: center;
       width: 48%;
@@ -136,18 +261,19 @@ input, textarea{
       list-style-type:disc;
 }
 
-.add-note-button{
-      margin-top: 1vh;
+.add-note-button, .add-notebook-button{
+      /* margin-top: 1vh; */
       margin-left: 3vw;
       margin-right: 3vw;
       height: 5vh;
-      background-color:rgba(206, 221, 255, 0.9)
+      background-color:rgba(206, 221, 255, 0.9);
 }
 
 .edit-note-form-form{
       display: block;
       /* flex-direction: column; */
       width: 95%;
+      height: fit-content;
       align-items: center;
       justify-content: center;
 }
@@ -185,4 +311,29 @@ input, textarea{
 
 .selected-notebook, .selected-note{
       background-color: rgb(72,35,83);
+}
+
+#user{
+      position: relative;
+      top: 10vh;
+      color: white;
+}
+
+.footer{
+      display: flex;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      justify-content: flex-end;
+}
+
+.footer-icon{
+      color: #C7C3F3;
+      padding-left: 5px;
+      margin-right: 5px;
+      font-size: 40px;
+}
+
+.footer-icon:hover{
+      color:#9F5869;
 }
