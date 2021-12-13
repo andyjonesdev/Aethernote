@@ -31,7 +31,7 @@ export default function EditNoteForm() {
 
             if (!title) validationErrors.push('New title cannot be blank');
             if (!content) validationErrors.push('New content cannot be blank');
-
+            if (title.length > 50) validationErrors.push('Title must be shorter than 50 characters')
             return validationErrors;
             }
             const errors = validate();

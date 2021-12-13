@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
 
 import { getNotebooks, createANotebook, editANotebook, deleteANotebook } from '../../store/notebooks'
@@ -11,13 +11,31 @@ export default function NotebooksList () {
       const dispatch = useDispatch()
       const history = useHistory()
 
+      const [tryToLoad, setTryToLoad] = useState(false)
+
       const user = useSelector(state => (state.session.user))
 
       useEffect(() => {
-            dispatch(getNotebooks(user))
-      }, [user, dispatch])
+            if(!user) {
+                  history.push('/')
+                  setTryToLoad(false)
+            } else setTryToLoad(true)
+      }, [])
+
+      // useEffect(() => {
+      //       if (user) setTryToLoad(true)
+      // }, [user])
+
+      useEffect(() => {
+            if (tryToLoad) {
+                  dispatch(getNotebooks(user))
+            }
+      }, [user, dispatch, tryToLoad])
 
       const notebookObjects =  useSelector(state => (state.notebooks.notebooks))
+
+      if (tryToLoad === true) {
+
       let notebooks = []
       if (notebookObjects.length) {
             notebooks = notebookObjects?.map(object => {
@@ -51,10 +69,10 @@ export default function NotebooksList () {
             <div className='list-title'>
             My Notebooks
             </div>
-            {/* <button onClick={() => {
-                  dispatch(createANotebook('Test Notebook'))
-            }} className='add-note-button'>Add Notebook </button> */}
             <AddNotebookModal />
             {notebooks}
       </div>)
+      }
+
+      return null
 }

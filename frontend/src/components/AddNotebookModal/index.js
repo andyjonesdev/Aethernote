@@ -4,7 +4,7 @@ import '../NotebooksList/NotebookList.css'
 import AddNotebookForm from './AddNotebookForm'
 import { Modal } from '../../context/Modal';
 
-function AddNotebookModal({ notebookId, title }) {
+function AddNotebookModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ function AddNotebookModal({ notebookId, title }) {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className='modal-upper-left'>Create a Notebook</div>
-          <AddNotebookForm />
+          <AddNotebookForm setShowModal={setShowModal}/>
         </Modal>
       )}
     </>

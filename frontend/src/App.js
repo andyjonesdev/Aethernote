@@ -9,6 +9,8 @@ import NotebooksList from "./components/NotebooksList"
 import NotesList from "./components/NotesList"
 import EditNoteForm from "./components/EditNoteForm"
 import CreateNoteForm from "./components/CreateNoteForm"
+import StartExpeditionModal from '../src/components/StartExpeditionModal'
+import AlreadyCrewmateModal from '../src/components/AlreadyCrewmateModal'
 import Footer from "./components/Footer"
 import * as sessionActions from "./store/session";
 import './components/NotebooksList/NotebookList.css'
@@ -63,8 +65,10 @@ function App() {
               <h1 className='splash-text'>Hey there, space cadet.</h1>
               <p className='splash-p'>Keep your logs organized with Aethernote.</p>
               {!user && <>
-                <button className='splash-button'>Start your expedition</button>
-                <button className='splash-button'>Already a crewmate? Login</button>
+                <StartExpeditionModal />
+                <AlreadyCrewmateModal />
+                {/* <button className='splash-button'>Start your expedition</button> */}
+                {/* <button className='splash-button'>Already a crewmate? Login</button> */}
               </>}
             </div>
             <Footer />
