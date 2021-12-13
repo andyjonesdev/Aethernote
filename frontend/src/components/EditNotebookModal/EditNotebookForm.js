@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
 import { editANotebook } from '../../store/notebooks'
+import '../LoginFormModal/LoginForm.css'
 
-function EditNotebookForm({ notebookId }) {
+function EditNotebookForm({ notebookId, title:prevTitle }) {
   const dispatch = useDispatch();
   const history = useHistory()
   const [title, setTitle] = useState('');
-  const [validationErrors, setValidationErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    const errors = []
+    if (!title.length) errors.push('Title cannot be blank')
+    if (title.length > 30) errors.push('Title must be shorter than 30 characters')
+    setErrors(errors)
+  }, [title])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editANotebook({notebookId, title}))
+    dispatch(editANotebook({notebookId}))
     history.push(`/notebooks`)
     // setErrors([]);
     // return dispatch(sessionActions.login({ credential, password }))
@@ -23,21 +32,21 @@ function EditNotebookForm({ notebookId }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul> */}
-      <label>
-        New Title
+    <form className='modal-form' onSubmit={handleSubmit}>
+      <ul>
+        {errors.map((error, idx) => <li className='modal-errors' key={idx}>{error}</li>)}
+      </ul>
+      <label className='modal-form-label'>
+        New Title for {prevTitle}
         <input
-          placeholder='New title'
+          className='modal-form-input'
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Update Notebook</button>
+      <button type="submit">Update</button>
     </form>
   );
 }

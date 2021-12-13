@@ -9,28 +9,23 @@ function AddNotebookForm() {
   const dispatch = useDispatch();
   const history = useHistory()
   const [title, setTitle] = useState('');
-  const [validationErrors, setValidationErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createANotebook(title))
     history.push(`/notebooks`)
-    // setErrors([]);
-    // return dispatch(sessionActions.login({ credential, password }))
-    //   .catch(async (res) => {
-    //     const data = await res.json();
-    //     if (data && data.errors) setErrors(data.errors);
-    //   });
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul> */}
-      <label>
+    <form className='modal-form' onSubmit={handleSubmit}>
+      <ul>
+        {errors.map((error, idx) => <li className='modal-errors' key={idx}>{error}</li>)}
+      </ul>
+      <label className='modal-form-label'>
         Title
         <input
+          className='modal-form-input'
           placeholder='Title for your notebook'
           type="text"
           value={title}
@@ -38,7 +33,7 @@ function AddNotebookForm() {
           required
         />
       </label>
-      <button type="submit">Create Notebook</button>
+      <button type="submit">Create</button>
     </form>
   );
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import './SignupForm.css';
+import '../LoginFormModal/LoginForm.css'
 import * as sessionActions from "../../store/session";
 
 function SignupForm() {
@@ -30,40 +31,44 @@ function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='modal-form' onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => <li className='modal-errors' key={idx}>{error}</li>)}
       </ul>
-      <label>
+      <label className='modal-form-label'>
         Email
         <input
+          className='modal-form-input'
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='modal-form-label'>
         Username
         <input
+          className='modal-form-input'
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='modal-form-label'>
         Password
         <input
+          className='modal-form-input'
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       </label>
-      <label>
+      <label className='modal-form-label'>
         Confirm Password
         <input
+          className='modal-form-input'
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}

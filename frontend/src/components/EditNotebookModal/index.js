@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import EditNotebookForm from '../EditNotebookModal/EditNotebookForm'
 import { Modal } from '../../context/Modal';
+import '../LoginFormModal/LoginForm.css'
 
 function EditNotebookModal({ notebookId, title }) {
   const [showModal, setShowModal] = useState(false);
@@ -13,8 +14,8 @@ function EditNotebookModal({ notebookId, title }) {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <div>Rename Notebook: {title}</div>
-          <EditNotebookForm notebookId={notebookId}/>
+          <div className='modal-upper-left'>Rename Notebook</div>
+          <EditNotebookForm notebookId={notebookId} title={title}/>
         </Modal>
       )}
     </div>

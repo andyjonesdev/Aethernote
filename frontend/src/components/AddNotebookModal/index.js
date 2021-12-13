@@ -12,7 +12,7 @@ function AddNotebookModal({ notebookId, title }) {
       <button className='add-notebook-button' onClick={() => setShowModal(true)}>Add Notebook</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <div>Create Notebook: {title}</div>
+          <div className='modal-upper-left'>Create a Notebook</div>
           <AddNotebookForm />
         </Modal>
       )}
