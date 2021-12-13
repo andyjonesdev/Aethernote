@@ -72,7 +72,7 @@ export const deleteANotebook = (notebookId) => async(dispatch) => {
 }
 
 //reducer
-const initialState = { notebooks: null };
+const initialState = { notebooks: [] };
 const notebooksReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -94,7 +94,7 @@ const notebooksReducer = (state = initialState, action) => {
       const foundIndex = newState.notebooks.findIndex(notebookObj => notebookObj.id === searchId)
       newState.notebooks[foundIndex] = action.payload
       return newState
-      
+
     case DELETE_NOTEBOOK:
       newState = Object.assign({}, state)
       const deleteId = action.payload

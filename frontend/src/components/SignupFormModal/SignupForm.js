@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import './SignupForm.css';
 import * as sessionActions from "../../store/session";
 
-function SignupFormPage() {
+function SignupForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -75,4 +75,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignupForm;
