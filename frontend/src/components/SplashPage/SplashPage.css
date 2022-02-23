@@ -1,0 +1,39 @@
+.splash-content{
+    bottom: 2vh;
+    position: relative;
+    height: 88vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+}
+
+.splash-text{
+    color: transparent;
+    background-image: url(https://img.freepik.com/free-vector/pastel-color-watercolor-stain-background_52683-12283.jpg?size=626&ext=jpg);
+    background-size: cover;
+    background-position: center;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 9rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.splash-p{
+    color: transparent;
+    background-image: url(https://img.freepik.com/free-vector/pastel-color-watercolor-stain-background_52683-12283.jpg?size=626&ext=jpg);
+    background-size: cover;
+    background-position: center;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    font-family: 'Lato', sans-serif;
+    font-size: 50px;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+}

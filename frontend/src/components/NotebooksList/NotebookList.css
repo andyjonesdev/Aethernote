@@ -51,36 +51,6 @@ input, textarea{
      left: 0.5vw;
 }
 
-.splash-text{
-      color: transparent;
-      background-image: url(https://img.freepik.com/free-vector/pastel-color-watercolor-stain-background_52683-12283.jpg?size=626&ext=jpg);
-      background-size: cover;
-      background-position: center;
-      -moz-background-clip: text;
-      -webkit-background-clip: text;
-      font-size: 175px;
-      font-family: 'Lato', sans-serif;
-      margin-bottom: 10%;
-}
-
-.splash-content{
-      bottom: 2vh;
-      position: relative;
-      margin-left: 5vw;
-}
-
-.splash-p{
-      color: transparent;
-      background-image: url(https://img.freepik.com/free-vector/pastel-color-watercolor-stain-background_52683-12283.jpg?size=626&ext=jpg);
-      background-size: cover;
-      background-position: center;
-      -moz-background-clip: text;
-      -webkit-background-clip: text;
-      font-family: 'Lato', sans-serif;
-      font-size: 50px;
-      margin-bottom: 2vh;
-}
-
 .splash-button{
       border-radius: 5px;
       margin-right: 10px;
@@ -319,7 +289,7 @@ input, textarea{
       color: white;
 }
 
-.footer{
+.footer {
       display: flex;
       position: absolute;
       bottom: 0;
