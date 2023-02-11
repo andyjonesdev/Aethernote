@@ -3,7 +3,7 @@
 
 
 Want to clone and run Aethernote locally？Here's how!
-1. Clone Aethernote in your desired directory by running the command: ```git clone https://github.com/andyrose507/Aethernote```.
+1. Clone Aethernote in your desired directory by running the command: ```git clone https://github.com/andyjonesdev/Aethernote```.
 2. Install necessary dependencies by running ```npm install``` in both the 'frontend' and 'backend' directories.
 3. Using the example in .env.example, create a .env file at the root of the project, replacing <'password'> with a secure password for your local database, 
 and <'secret'> with a strong secret that cannot be guessed. I recommend generating one using an encryption tool such as https://jwt.io/. 
